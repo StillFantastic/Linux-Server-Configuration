@@ -125,6 +125,6 @@ service apache2 restart
 ```
 
 ## Useful links
-[Upgrade message doesn't change](https://serverfault.com/questions/262751/update-ubuntu-10-04/262773#262773)
+[Upgrade message doesn't change](https://serverfault.com/questions/262751/update-ubuntu-10-04/262773#262773)   
 [mod_wsgi](http://flask.pocoo.org/docs/0.12/deploying/mod_wsgi/)
 	
