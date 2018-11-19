@@ -3,7 +3,8 @@ Udacity Full Stack Nanodegree Fianl Project
 
 # Server details
 IP address: ```52.194.250.57```   
-ssh port: ```2200```
+ssh port: ```2200```   
+app: ```http://52.194.250.57/restaurant```
 
 # Configuration changes
 ## Configuration of Uncomplicated Firewall(UFW)
