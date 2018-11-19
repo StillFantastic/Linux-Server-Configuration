@@ -1,12 +1,12 @@
-### Linux Server Configuration
+# Linux Server Configuration
 Udacity Full Stack Nanodegree Fianl Project
 
-### Server details
-IP address: ```52.194.250.57```
+# Server details
+IP address: ```52.194.250.57```   
 ssh port: ```2200```
 
-### Configuration changes
-# Configuration of Uncomplicated Firewall(UFW)
+# Configuration changes
+## Configuration of Uncomplicated Firewall(UFW)
 ```
 ufw allow 80/tcp
 ufw allow 2200/tcp
@@ -18,76 +18,76 @@ To check the status of firewall, use:
 ufw status
 ```
 
-# Change SSH port from 22 to 2200
-Edit the file ```/etc/ssh/sshd_config``` and change the line ```Port 22``` to:
-```Port 2200```
-Restart ssh service
+## Change SSH port from 22 to 2200
+Edit the file ```/etc/ssh/sshd_config``` and change the line ```Port 22``` to:   
+```Port 2200```   
+Restart ssh service   
 ```service ssh restart```
 
-# Update all currently installed packages
+## Update all currently installed packages
 ```
 apt-get update
 apt-get upgrade
 ```
 
-# Add user grader
+## Add user grader
 ```
 adduser grader
 ```
 
-# Give grader sudo access
-Go to ```/etc/sudoers.d/grader``` and add the following line:
+## Give grader sudo access
+Go to ```/etc/sudoers.d/grader``` and add the following line:   
 ```
 grader ALL=(ALL:ALL) NOPASSWD=ALL
 ```
 
-# Set up ssh key for grader
-On your local machine, go to ```~/.ssh``` and run the following command:
-```ssh-keygen -t rsa```
-and copy the public key to server:
-```ssh-key-copy -i YOUR_PUBLIC_KEY grader@52.194.250.57```
-Can now login as grader using the command: ```ssh -i ~/.ssh/PRIVATE_KEY grader@52.194.250.57 -p 2200```
+## Set up ssh key for grader
+On your local machine, go to ```~/.ssh``` and run the following command:   
+```ssh-keygen -t rsa```   
+and copy the public key to server:   
+```ssh-key-copy -i YOUR_PUBLIC_KEY grader@52.194.250.57```   
+Can now login as grader using the command: ```ssh -i ~/.ssh/PRIVATE_KEY grader@52.194.250.57 -p 2200```   
 
-# Change timezone to UTC
+## Change timezone to UTC
 ```
 timedatectl set-timezone UTC
 ```
 
-# Install package to serve web applications
+## Install package to serve web applications
 ``` 
 apt-get install apache2
 apt-get install libapache2-mod-wsgi
 ```
 
-# Install and configure PostgreSQL
-Install PostgreSQL with:
+## Install and configure PostgreSQL
+Install PostgreSQL with:   
 ```
 apt-get install postgresql postgresql-contrib
-```
-Conenct to PostgreSQL:
+```   
+Conenct to PostgreSQL:   
 ```
 sudo -u postgres psql
-```
-Set a password for postgres:
+```   
+Set a password for postgres:   
 ```
 AFTER USER postgres PASSWORD 'password'
-```
-Go to ```/etc/postgresql/9.5cd/main/pg_hba.conf``` and change authentication method from ```peer``` to ```md5```
+```   
+Go to ```/etc/postgresql/9.5cd/main/pg_hba.conf``` and change authentication method from ```peer``` to ```md5```   
 
-# Install Git
+## Install Git
 ```
 apt-get install git
 ```
 
-# Clone the repository and set up environment
+## Clone the repository and set up environment
 ```
 cd /var/www/
 git clone https://github.com/StillFantastic/Catalog.git Catalog
 ```
 and follow the instruction in repository to set up environment
 
-# WSGI file
-inside your repository, create a new file project.wsgi:
+## WSGI file
+inside your repository, create a new file project.wsgi:   
 ```
 import sys
 import logging
@@ -97,8 +97,9 @@ sys.path.insert(0, "/var/www/Catalog/")
 from bookCatalog import app as application
 ```
 
-# Configure the setting of apache
-Edit the file ```/etc/apache2/sites-available/000-default.conf```
+## Configure the setting of apache
+
+Edit the file ```/etc/apache2/sites-available/000-default.conf```   
 ```
 <VirtualHost *:80>
   ServerName XX.XX.XX.XX
@@ -116,7 +117,7 @@ Edit the file ```/etc/apache2/sites-available/000-default.conf```
 </VirtualHost>
 ```
 
-# Restart Apache to launch the app
+## Restart Apache to launch the app
 ```
 service apache2 restart
 ```
